@@ -1,0 +1,93 @@
+{
+  "name": "coding-partner-openai",
+  "displayName": "Coding Partner OpenAI",
+  "description": "Copilot-like chat participant that talks directly to OpenAI as the brain",
+  "version": "0.0.3",
+  "publisher": "your-name-or-org",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "coding-partner-openai.partner",
+        "name": "partner",
+        "fullName": "Coding Partner",
+        "description": "Explain, refactor, and write tests using your OpenAI key",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "explain",
+            "description": "Explain the selected code or current file"
+          },
+          {
+            "name": "refactor",
+            "description": "Suggest a better structure or rewrite"
+          },
+          {
+            "name": "tests",
+            "description": "Propose unit tests for the selected code"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "coding-partner-openai.setApiKey",
+        "title": "Coding Partner OpenAI: Set API Key"
+      },
+      {
+        "command": "coding-partner-openai.applyLastCodeBlock",
+        "title": "Coding Partner OpenAI: Apply Last Code Block"
+      },
+      {
+        "command": "coding-partner-openai.openReadme",
+        "title": "Coding Partner OpenAI: Open README"
+      }
+    ],
+    "configuration": {
+      "title": "Coding Partner OpenAI",
+      "properties": {
+        "coding-partner-openai.model": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "OpenAI chat model id to use"
+        },
+        "coding-partner-openai.apiBase": {
+          "type": "string",
+          "default": "https://api.openai.com/v1",
+          "description": "OpenAI API base URL"
+        },
+        "coding-partner-openai.temperature": {
+          "type": "number",
+          "default": 0.2,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Sampling temperature"
+        }
+      }
+    }
+  },
+  "activationEvents": [
+    "onChatParticipant:coding-partner-openai.partner",
+    "onCommand:coding-partner-openai.setApiKey",
+    "onCommand:coding-partner-openai.applyLastCodeBlock",
+    "onCommand:coding-partner-openai.openReadme"
+  ],
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -p . -w",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.6.2",
+    "vsce": "^2.15.0"
+  }
+}

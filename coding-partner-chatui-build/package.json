@@ -1,0 +1,69 @@
+{
+  "name": "coding-partner-chatui",
+  "displayName": "Coding Partner Chat UI",
+  "description": "Chat, inline suggestions, repo context, PR tools, multi-file edits.",
+  "version": "0.3.0",
+  "publisher": "your-name-or-org",
+  "license": "MIT",
+  "engines": { "vscode": "^1.95.0" },
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "coding-partner", "title": "Coding Partner", "icon": "media/icon.svg" }
+      ]
+    },
+    "views": {
+      "coding-partner": [
+        { "type": "webview", "name": "Chat", "id": "coding-partner.chat" }
+      ]
+    },
+    "commands": [
+      { "command": "coding-partner-chatui.openChat", "title": "Coding Partner Open Chat" },
+      { "command": "coding-partner-chatui.setApiKey", "title": "Coding Partner Set API Key" },
+      { "command": "coding-partner-chatui.applyLastCodeBlock", "title": "Coding Partner Apply Last Code Block" },
+      { "command": "coding-partner-chatui.toggleInline", "title": "Coding Partner Toggle Inline Completions" },
+      { "command": "coding-partner-chatui.prSummary", "title": "Coding Partner Generate PR Summary" },
+      { "command": "coding-partner-chatui.reviewDiff", "title": "Coding Partner Review Diff" },
+      { "command": "coding-partner-chatui.previewMultiEdit", "title": "Coding Partner Preview Multi File Edit" },
+      { "command": "coding-partner-chatui.applyMultiEdit", "title": "Coding Partner Apply Multi File Edit" },
+      { "command": "coding-partner-chatui.diagnoseKey", "title": "Coding Partner Diagnose Key" },
+      { "command": "coding-partner-chatui.runTaskWithAssist", "title": "Coding Partner Run Task With Assist" },
+      { "command": "coding-partner-chatui.reindexRepo", "title": "Coding Partner Reindex Repo" }
+    ],
+    "configuration": {
+      "title": "Coding Partner",
+      "properties": {
+        "coding-partner-chatui.provider": { "type": "string", "enum": ["openai","anthropic","google"], "default": "openai" },
+        "coding-partner-chatui.model": { "type": "string", "default": "gpt-4o-mini" },
+        "coding-partner-chatui.apiBase": { "type": "string", "default": "https://api.openai.com/v1" },
+        "coding-partner-chatui.apiKey": { "type": "string", "default": "" },
+        "coding-partner-chatui.anthropicKey": { "type": "string", "default": "" },
+        "coding-partner-chatui.googleKey": { "type": "string", "default": "" },
+        "coding-partner-chatui.enableInline": { "type": "boolean", "default": true },
+        "coding-partner-chatui.review.guidelines": {
+          "type": "string",
+          "default": "Keep changes minimal. Enforce project style. Flag security, performance, and API breaks.",
+          "markdownDescription": "Guidelines for AI code review."
+        }
+      }
+    }
+  },
+  "activationEvents": [
+    "onView:coding-partner.chat",
+    "onCommand:coding-partner-chatui.openChat",
+    "onCommand:coding-partner-chatui.setApiKey",
+    "onCommand:coding-partner-chatui.applyLastCodeBlock",
+    "onCommand:coding-partner-chatui.toggleInline",
+    "onCommand:coding-partner-chatui.prSummary",
+    "onCommand:coding-partner-chatui.reviewDiff",
+    "onCommand:coding-partner-chatui.previewMultiEdit",
+    "onCommand:coding-partner-chatui.applyMultiEdit",
+    "onCommand:coding-partner-chatui.diagnoseKey",
+    "onCommand:coding-partner-chatui.runTaskWithAssist",
+    "onCommand:coding-partner-chatui.reindexRepo",
+    "onUri"
+  ],
+  "devDependencies": { "vsce": "^2.15.0" }
+}
